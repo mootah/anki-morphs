@@ -509,6 +509,12 @@ def _on_failure(  # pylint:disable=too-many-branches
                 "Installation code: 1857311956 <br><br>"
                 "The morphemizer should be automatically found after the add-on is installed and Anki has restarted."
             )
+        elif error.morphemizer_name == "MecabKoMorphemizer":
+            text = (
+                'Morphemizer "AnkiMorphs: Korean" was not found.<br><br>'
+                "The Korean morphemizer can be added by installing the anki_morphs_mecab_korean companion add-on.<br><br>"
+                "The morphemizer should be automatically found after the add-on is installed and Anki has restarted."
+            )
         else:
             text = f'Morphemizer "{error.morphemizer_name}" was not found.'
 

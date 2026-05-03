@@ -3,6 +3,7 @@ from __future__ import annotations
 from ..morphemizers import spacy_wrapper
 from ..morphemizers.jieba_morphemizer import JiebaMorphemizer
 from ..morphemizers.mecab_morphemizer import MecabMorphemizer
+from ..morphemizers.mecabko_morphemizer import MecabKoMorphemizer
 from ..morphemizers.morphemizer import Morphemizer
 from ..morphemizers.simple_space_morphemizer import SimpleSpaceMorphemizer
 from ..morphemizers.spacy_morphemizer import SpacyMorphemizer
@@ -13,7 +14,6 @@ morphemizers_by_description: dict[str, Morphemizer] = {}
 
 def get_all_morphemizers() -> list[Morphemizer]:
     global available_morphemizers
-
     if available_morphemizers is None:
         # the space morphemizer is always included since it's pure python
         available_morphemizers = [
@@ -23,6 +23,10 @@ def get_all_morphemizers() -> list[Morphemizer]:
         _mecab = MecabMorphemizer()
         if _mecab.init_successful():
             available_morphemizers.append(_mecab)
+
+        _mecabko = MecabKoMorphemizer()
+        if _mecabko.init_successful():
+            available_morphemizers.append(_mecabko)
 
         _jieba = JiebaMorphemizer()
         if _jieba.init_successful():

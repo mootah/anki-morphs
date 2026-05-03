@@ -91,3 +91,29 @@ def test_jieba_morpheme_generation(  # pylint:disable=unused-argument
 
     for morph in extracted_morphs:
         assert morph in correct_morphs
+
+
+@pytest.mark.external_morphemizers
+def test_mecabko_morpheme_generation(  # pylint:disable=unused-argument
+    _fake_environment_fixture: None,
+) -> None:
+    morphemizer = get_morphemizer_by_description("AnkiMorphs: Korean")
+    assert morphemizer is not None
+
+    sentence = "정말 중요한 임무일 때만 움직인다"
+    correct_morphs: set[Morpheme] = {
+        Morpheme("정말", "정말", "感動詞", "感動詞"),
+        Morpheme("중요", "중요", "名詞", "一般"),
+        Morpheme("하", "한", "接尾辞", "形容詞接尾辞"),
+        Morpheme("임무", "임무", "名詞", "一般"),
+        Morpheme("이", "일", "用言", "指定詞"),
+        Morpheme("때", "때", "名詞", "一般"),
+        Morpheme("만", "만", "助詞", "補助詞"),
+        Morpheme("움직이", "움직인다", "用言", "動詞"),
+    }
+
+    extracted_morphs = next(morphemizer.get_morphemes([sentence]))
+    assert len(extracted_morphs) == 8
+
+    for morph in extracted_morphs:
+        assert morph in correct_morphs
