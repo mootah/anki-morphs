@@ -4,6 +4,7 @@ import os
 from aqt import mw
 
 from . import ankimorphs_globals
+from .morphemizers.mecabko_wrapper import get_morphemes_mecabko
 
 
 def add_name_to_file(selected_text: str) -> None:
@@ -21,6 +22,7 @@ def add_name_to_file(selected_text: str) -> None:
 
     # clear the cache so the new name(s) are included
     get_names_from_file.cache_clear()
+    get_morphemes_mecabko.cache_clear()
 
 
 @functools.cache

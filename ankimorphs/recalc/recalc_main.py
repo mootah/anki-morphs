@@ -246,14 +246,6 @@ def _update_cards_and_notes(  # pylint:disable=too-many-locals, too-many-stateme
                         unknowns=cards_morph_metrics.unknown_morphs,
                     )
 
-                if config_filter.extra_all_morphs:
-                    extra_field_utils.update_all_morphs_field(
-                        am_config=am_config,
-                        field_name_dict=field_name_dict,
-                        note=note,
-                        all_morphs=cards_morph_metrics.all_morphs,
-                    )
-
                 if config_filter.extra_all_morphs_count:
                     extra_field_utils.update_all_morphs_count_field(
                         field_name_dict=field_name_dict,
@@ -283,6 +275,14 @@ def _update_cards_and_notes(  # pylint:disable=too-many-locals, too-many-stateme
                 )
 
             # always update these regardless of the state of the card
+            if config_filter.extra_all_morphs:
+                extra_field_utils.update_all_morphs_field(
+                    am_config=am_config,
+                    field_name_dict=field_name_dict,
+                    note=note,
+                    all_morphs=cards_morph_metrics.all_morphs,
+                )
+
             if config_filter.extra_unknown_morphs:
                 extra_field_utils.update_unknown_morphs_field(
                     am_config=am_config,

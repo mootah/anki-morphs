@@ -30,7 +30,7 @@ def get_morphemes_mecabko(expression: str) -> list[Morpheme]:
     morphs = _mecabko.get_morphs(expression)
     actual_morphs: list[Morpheme] = []
 
-    for lemma, surface, pos, sub_pos in morphs:
+    for lemma, surface, pos, sub_pos, _ in morphs:
         if pos in ["記号", "その他"]:
             continue
         actual_morphs.append(
